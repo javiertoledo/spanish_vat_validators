@@ -30,25 +30,25 @@ Or install it yourself as:
 
 Just use any of the following validators.
 
-  # A person id
-  class Person < ActiveRecord::Base
-    validates :dni, :valid_nif => true
-  end
+    # A person id
+    class Person < ActiveRecord::Base
+      validates :dni, :valid_nif => true
+    end
 
-  # A company id
-  class Company < ActiveRecord::Base
-    validates :cif, :valid_cif => true
-  end
+    # A company id
+    class Company < ActiveRecord::Base
+      validates :cif, :valid_cif => true
+    end
 
-  # A foreigner id
-  class Alien < ActiveRecord::Base
-    validates :nie, :valid_nie => true
-  end
+    # A foreigner id
+    class Alien < ActiveRecord::Base
+      validates :nie, :valid_nie => true
+    end
 
-  # Any kind of id is valid
-  class SpanishSubject < ActiveRecord::Base
-    validates :id, :valid_spanish_vat => true
-  end
+    # Any kind of id is valid
+    class SpanishSubject < ActiveRecord::Base
+      validates :id, :valid_spanish_vat => true
+    end
 
 ## Contributing
 
