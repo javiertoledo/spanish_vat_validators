@@ -31,7 +31,7 @@ Or install it yourself as:
 Just use any of the following validators.
 
     # A person id
-    class Person < ActiveRecord::Base
+    class Spaniard < ActiveRecord::Base
       validates :dni, :valid_nif => true
     end
 
@@ -45,9 +45,14 @@ Just use any of the following validators.
       validates :nie, :valid_nie => true
     end
 
+    # Any person id
+    class Person < ActiveRecord::Base
+      validates :any_id, :valid_spanish_id => true
+    end
+
     # Any kind of id is valid
     class SpanishSubject < ActiveRecord::Base
-      validates :id, :valid_spanish_vat => true
+      validates :nif, :valid_spanish_vat => true
     end
 
 ## Contributing

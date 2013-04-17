@@ -47,12 +47,11 @@ module ActiveModel::Validations
       end
     end
 
-    # Validates NIE, in fact is a fake, a NIE is really a NIF with first number changed to capital 'X' letter, so we change the first X to a 0 and then try to
-    # pass the nif validator
+    # Validates NIE
+    # a NIE is really a NIF with first number changed to capital X, Y or Z letter
     def validate_nie(value)
-      return false unless value.match(/[x][0-9]{7,8}[a-z]/i)
-      value[0] = '0'
-      value.slice(0) if value.size > 9
+      return false unless value.match(/[xyz][0-9]{7}[a-z]/i)
+      value[0] = {"X" => "0", "Y" => "1", "Z" => "2"}[value[0]]
       validate_nif(value)
     end
   end
@@ -62,6 +61,14 @@ module ActiveModel::Validations
     include SpanishVatValidatorsHelpers
     def validate_each(record, attribute, value)
       record.errors[attribute] = message unless validate_nif(value.clone) or validate_cif(value.clone) or validate_nie(value.clone)
+    end
+  end
+
+  # Validates any Spanish person number
+  class ValidSpanishIdValidator < ActiveModel::EachValidator
+    include SpanishVatValidatorsHelpers
+    def validate_each(record, attribute, value)
+      record.errors[attribute] = message unless validate_nif(value.clone) or validate_nie(value.clone)
     end
   end
 
@@ -85,7 +92,7 @@ module ActiveModel::Validations
   class ValidNieValidator < ActiveModel::EachValidator
     include SpanishVatValidatorsHelpers
     def validate_each(record, attribute,value)
-      record.errors[attribute] = message('nie') unless validate_cif(value.clone)
+      record.errors[attribute] = message('nie') unless validate_nie(value.clone)
     end
   end
 
