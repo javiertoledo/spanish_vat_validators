@@ -8,6 +8,7 @@ Also added I18n support for error messages, which you can change by adding this 
       errors:
         messages:
           not_valid_spanish_vat: El número de identificación fiscal no es válido
+          not_valid_spanish_id: El NIF/NIE no es válido
           not_valid_nif: El NIF no es válido
           not_valid_cif: El CIF no es válido
           not_valid_nie: El NIE no es válido
