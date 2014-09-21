@@ -75,7 +75,7 @@ module ActiveModel::Validations
   class ValidSpanishIdValidator < ActiveModel::EachValidator
     include SpanishVatValidatorsHelpers
     def validate_each(record, attribute, value)
-      record.errors[attribute] = message unless validate_nif(value) or validate_nie(value)
+      record.errors[attribute] = message('spanish_id') unless validate_nif(value) or validate_nie(value)
     end
   end
 
