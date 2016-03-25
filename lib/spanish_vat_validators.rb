@@ -37,11 +37,11 @@ module ActiveModel::Validations
         [1,3,5,7].collect do |cont|
           xxx = (2 * texto[cont,1].to_i).to_s + "0"
           impares += xxx[0,1].to_i + xxx[1,1].to_i
-          pares += texto[cont+1,1].to_i
         end
 
-        xxx = (2 * texto[8,1].to_i).to_s + "0"
-        impares += xxx[0,1].to_i + xxx[1,1].to_i
+        [2,4,6].collect do |cont|
+          pares += texto[cont,1].to_i
+        end
 
         suma = (pares + impares).to_s
         unumero = suma.last.to_i
