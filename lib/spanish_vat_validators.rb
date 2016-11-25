@@ -4,7 +4,7 @@ require "spanish_vat_validators/version"
 module ActiveModel::Validations
 
   module SpanishVatValidatorsHelpers
-    def message(kind='vat')
+    def message(kind='spanish_vat')
       I18n.translate!("errors.messages.not_valid_#{kind}") rescue 'is invalid'
     end
 
@@ -24,27 +24,27 @@ module ActiveModel::Validations
       return false if v.nil? || v.empty?
       value = v.clone
       return false unless value.match(/^[a-wyz][0-9]{7}[0-9a-z]$/i)
-      pares = 0
-      impares = 0
-      uletra = ["J", "A", "B", "C", "D", "E", "F", "G", "H", "I"]
-      texto = value.upcase
+      even = 0
+      odd = 0
+      uletter = ["J", "A", "B", "C", "D", "E", "F", "G", "H", "I"]
+      text = value.upcase
       regular = /^[ABCDEFGHKLMNPQRSVW]\d{7}[0-9,A-J]$/#g);
       if regular.match(value).blank?
         false
       else
-        ultima = texto[8,1]
+        last = text[8,1]
 
         [1,3,5,7].collect do |cont|
-          xxx = (2 * texto[cont,1].to_i).to_s + "0"
-          impares += xxx[0,1].to_i + xxx[1,1].to_i
-          pares += texto[cont+1,1].to_i if cont < 7
+          xxx = (2 * text[cont,1].to_i).to_s + "0"
+          odd += xxx[0,1].to_i + xxx[1,1].to_i
+          even += text[cont+1,1].to_i if cont < 7
         end
 
-        suma = (pares + impares).to_s
-        unumero = suma.last.to_i
-        unumero = (10 - unumero).to_s
-        unumero = 0 if(unumero.to_i == 10)
-        ((ultima.to_i == unumero.to_i) || (ultima == uletra[unumero.to_i]))
+        sum = (even + odd).to_s
+        unumber = sum.last.to_i
+        unumber = (10 - unumber).to_s
+        unumber = 0 if(unumber.to_i == 10)
+        ((last.to_i == unumber.to_i) || (last == uletter[unumber.to_i]))
       end
     end
 
