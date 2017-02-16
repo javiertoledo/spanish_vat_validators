@@ -63,7 +63,7 @@ module ActiveModel::Validations
   class ValidSpanishVatValidator < ActiveModel::EachValidator
     include SpanishVatValidatorsHelpers
     def validate_each(record, attribute, value)
-      record.errors[attribute] = message unless validate_nif(value) or validate_cif(value) or validate_nie(value)
+      record.errors.add(attribute, message) unless validate_nif(value) or validate_cif(value) or validate_nie(value)
     end
   end
 
@@ -71,7 +71,7 @@ module ActiveModel::Validations
   class ValidSpanishIdValidator < ActiveModel::EachValidator
     include SpanishVatValidatorsHelpers
     def validate_each(record, attribute, value)
-      record.errors[attribute] = message('spanish_id') unless validate_nif(value) or validate_nie(value)
+      record.errors.add(attribute, message('spanish_id')) unless validate_nif(value) or validate_nie(value)
     end
   end
 
@@ -79,7 +79,7 @@ module ActiveModel::Validations
   class ValidNifValidator < ActiveModel::EachValidator
     include SpanishVatValidatorsHelpers
     def validate_each(record, attribute,value)
-      record.errors[attribute] = message('nif') unless validate_nif(value)
+      record.errors.add(attribute, message('nif')) unless validate_nif(value)
     end
   end
 
@@ -87,7 +87,7 @@ module ActiveModel::Validations
   class ValidCifValidator < ActiveModel::EachValidator
     include SpanishVatValidatorsHelpers
     def validate_each(record, attribute,value)
-      record.errors[attribute] = message('cif') unless validate_cif(value)
+      record.errors.add(attribute, message('cif')) unless validate_cif(value)
     end
   end
 
@@ -95,7 +95,7 @@ module ActiveModel::Validations
   class ValidNieValidator < ActiveModel::EachValidator
     include SpanishVatValidatorsHelpers
     def validate_each(record, attribute,value)
-      record.errors[attribute] = message('nie') unless validate_nie(value)
+      record.errors.add(attribute, message('nie')) unless validate_nie(value)
     end
   end
 
