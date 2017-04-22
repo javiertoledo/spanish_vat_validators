@@ -42,7 +42,7 @@ module ActiveModel::Validations
         end
 
         sum = (even + odd).to_s
-        unumber = sum.last.to_i
+        unumber = sum[-1].to_i
         unumber = (10 - unumber).to_s
         unumber = 0 if(unumber.to_i == 10)
         ((last.to_i == unumber.to_i) || (last == uletter[unumber.to_i]))
