@@ -14,4 +14,13 @@ Gem::Specification.new do |gem|
   gem.name          = "spanish_vat_validators"
   gem.require_paths = ["lib"]
   gem.version       = SpanishVatValidators::VERSION
+
+  gem.required_ruby_version = '>= 1.9.3'
+
+  gem.add_dependency 'activemodel', '>= 3.2.0'
+
+  gem.add_development_dependency 'bundler', '~> 1.6'
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'appraisal'
 end
