@@ -58,7 +58,7 @@ end
 describe ActiveModel::Validations::ValidCifValidator do
   describe '#validate_each' do
     it 'does not add errors with a valid number' do
-      %w[S6185663I C2871341J G37880135 F43766880 J27950005 V63423321].each do |identification_number|
+      %w[S6185663I C2871341J G37880135 F43766880 A58818501 J27950005 V63423321].each do |identification_number|
         record = build_record(identification_number)
         should_be_valid(record)
       end

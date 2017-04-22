@@ -29,7 +29,7 @@ module ActiveModel::Validations
       odd = 0
       uletter = ["J", "A", "B", "C", "D", "E", "F", "G", "H", "I"]
       text = value.upcase
-      regular = /^[ABCDEFGHKLMNPQRSVW]\d{7}[0-9,A-J]$/#g);
+      regular = /^[ABCDEFGHJKLMNPQRSVW]\d{7}[0-9,A-J]$/#g);
       if regular.match(value).blank?
         false
       else
