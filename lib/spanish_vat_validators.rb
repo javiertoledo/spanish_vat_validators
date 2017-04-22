@@ -33,7 +33,7 @@ module ActiveModel::Validations
         false
       else
         ultima = texto[8,1]
-	      
+
         [1,3,5,7].collect do |cont|
           xxx = (2 * texto[cont,1].to_i).to_s + "0"
           impares += xxx[0,1].to_i + xxx[1,1].to_i
