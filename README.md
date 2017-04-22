@@ -1,4 +1,4 @@
-# SpanishVatValidators
+# SpanishVatValidators [![Build Status](https://travis-ci.org/dgilperez/spanish_vat_validators.svg?branch=master)](https://travis-ci.org/dgilperez/spanish_vat_validators)[![Code Climate](https://codeclimate.com/github/dgilperez/spanish_vat_validators/badges/gpa.svg)](https://codeclimate.com/github/dgilperez/spanish_vat_validators)
 
 I've adapted the code from the ValidateSpanishVAT plugin from https://github.com/lleirborras/ValidateSpanishVAT to be distributed as a gem for ease of use with Rails 3.
 
