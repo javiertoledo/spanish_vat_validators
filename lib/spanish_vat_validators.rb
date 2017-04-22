@@ -1,5 +1,6 @@
-#encoding: utf-8
+# encoding: utf-8
 require "spanish_vat_validators/version"
+require 'active_model'
 
 module ActiveModel::Validations
 
@@ -51,7 +52,7 @@ module ActiveModel::Validations
     # Validates NIE
     # a NIE is really a NIF with first number changed to capital X, Y or Z letter
     def validate_nie(v)
-	  return false if v.nil? || v.empty?
+      return false if v.nil? || v.empty?
       value = v.upcase
       return false unless value.match(/^[xyz][0-9]{7}[a-z]$/i)
       value[0] = {"X" => "0", "Y" => "1", "Z" => "2"}[value[0]]
