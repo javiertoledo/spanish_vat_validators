@@ -14,7 +14,7 @@ module ActiveModel::Validations
       value = v.upcase
       return false unless value.match(/^[0-9]{8}[a-z]$/i)
       letters = "TRWAGMYFPDXBNJZSQVHLCKE"
-      check = value.slice!(value.length - 1..value.length - 1)
+      check = value.slice!(value.length - 1)
       calculated_letter = letters[value.to_i % 23].chr
       return check === calculated_letter
     end
