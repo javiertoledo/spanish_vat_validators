@@ -1,0 +1,39 @@
+sudo: false
+
+cache: bundler
+
+script: 'bundle exec rake'
+
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1.5
+  - 2.2.0
+  - 2.2.4
+  - 2.3.0
+
+gemfile:
+  - gemfiles/rails_3.2.gemfile
+  - gemfiles/rails_4.0.gemfile
+  - gemfiles/rails_4.1.gemfile
+  - gemfiles/rails_4.2.gemfile
+  - gemfiles/rails_5.0.gemfile
+
+matrix:
+  fast_finish: true
+  exclude:
+  - rvm: 1.9.3
+    gemfile: gemfiles/rails_5.0.gemfile
+  - rvm: 2.0.0
+    gemfile: gemfiles/rails_5.0.gemfile
+  - rvm: 2.1.5
+    gemfile: gemfiles/rails_5.0.gemfile
+  - rvm: 2.2.0
+    gemfile: gemfiles/rails_5.0.gemfile
+
+addons:
+  code_climate:
+    repo_token: 3a0f3547e95bcf5828df4c53639a2267fe0d61d9ac816220772e5337120aceeb
+
+after_success:
+  - bundle exec codeclimate-test-reporter
