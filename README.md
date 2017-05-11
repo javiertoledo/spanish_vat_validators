@@ -56,6 +56,12 @@ Just use any of the following validators.
       validates :nif, :valid_spanish_vat => true
     end
 
+You can override the error message using the `message` option.
+
+    class Person < ActiveRecord::Base
+      validates :dni, valid_nif: { message: 'invalid' }
+    end
+
 ## Contributing
 
 1. Fork it

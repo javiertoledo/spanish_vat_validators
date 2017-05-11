@@ -15,6 +15,13 @@ describe ActiveModel::Validations::ValidSpanishVatValidator do
         should_be_invalid(record)
       end
     end
+
+    it 'adds errors with an invalid number and custom message' do
+      %w[Y8527549 S618-5663I 000 Y1527549Z invalid_zip].each do |identification_number|
+        record = build_record(identification_number)
+        should_be_invalid(record, 'invalid')
+      end
+    end
   end
 end
 
@@ -32,6 +39,13 @@ describe ActiveModel::Validations::ValidSpanishIdValidator do
       %w[1234 96380632 284-59349T 5696134L S6185663I invalid_zip].each do |identification_number|
         record = build_record(identification_number)
         should_be_invalid(record)
+      end
+    end
+
+    it 'adds errors with an invalid number and custom message' do
+      %w[1234 96380632 284-59349T 5696134L S6185663I invalid_zip].each do |identification_number|
+        record = build_record(identification_number)
+        should_be_invalid(record, 'invalid')
       end
     end
   end
@@ -52,6 +66,13 @@ describe ActiveModel::Validations::ValidNifValidator do
         should_be_invalid(record)
       end
     end
+
+    it 'adds errors with an invalid number and custom message' do
+      %w[1234 96380632 284-59349T 5696134L S6185663I Y8527549Z invalid_zip].each do |identification_number|
+        record = build_record(identification_number)
+        should_be_invalid(record, 'invalid')
+      end
+    end
   end
 end
 
@@ -68,6 +89,13 @@ describe ActiveModel::Validations::ValidCifValidator do
       %w[1234 2871341J 284-59349T 22472947S Y8527549Z invalid_zip].each do |identification_number|
         record = build_record(identification_number)
         should_be_invalid(record)
+      end
+    end
+
+    it 'adds errors with an invalid number and custom message' do
+      %w[1234 2871341J 284-59349T 22472947S Y8527549Z invalid_zip].each do |identification_number|
+        record = build_record(identification_number)
+        should_be_invalid(record, 'invalid')
       end
     end
   end
@@ -88,6 +116,13 @@ describe ActiveModel::Validations::ValidNieValidator do
         should_be_invalid(record)
       end
     end
+
+    it 'adds errors with an invalid number and custom message' do
+      %w[8527549Z 22472947S 000 S6185663I invalid_zip].each do |identification_number|
+        record = build_record(identification_number)
+        should_be_invalid(record, 'invalid')
+      end
+    end
   end
 end
 
@@ -96,10 +131,12 @@ def should_be_valid(record)
   expect(record.errors).to be_empty
 end
 
-def should_be_invalid(record)
-  described_class.new(attributes: :identification_number).validate(record)
+def should_be_invalid(record, message = nil)
+  params = { attributes: :identification_number }
+  params[:message] = message if message
+  described_class.new(params).validate(record)
   expect(record.errors.size).to eq 1
-  expect(record.errors.messages[:identification_number]).to include 'is invalid'
+  expect(record.errors.messages[:identification_number]).to include(message || 'is invalid')
 end
 
 def build_record(identification_number)

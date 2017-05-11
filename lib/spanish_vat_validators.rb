@@ -6,7 +6,7 @@ module ActiveModel::Validations
 
   module SpanishVatValidatorsHelpers
     def message(kind='spanish_vat')
-      I18n.translate!("errors.messages.not_valid_#{kind}") rescue 'is invalid'
+      options[:message] || (I18n.translate!("errors.messages.not_valid_#{kind}") rescue 'is invalid')
     end
 
     # Validates NIF
