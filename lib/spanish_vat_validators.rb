@@ -13,7 +13,7 @@ module ActiveModel::Validations
     def validate_nif(v)
       return false if v.nil? || v.empty?
       value = v.upcase
-      return false unless value.match(/^[0-9]{8}[a-z]$/i)
+      return false unless value.match(/\A[0-9]{8}[a-z]\z/i)
       letters = "TRWAGMYFPDXBNJZSQVHLCKE"
       check = value.slice!(value.length - 1)
       calculated_letter = letters[value.to_i % 23].chr
@@ -24,12 +24,12 @@ module ActiveModel::Validations
     def validate_cif(v)
       return false if v.nil? || v.empty?
       value = v.clone
-      return false unless value.match(/^[a-wyz][0-9]{7}[0-9a-z]$/i)
+      return false unless value.match(/\A[a-wyz][0-9]{7}[0-9a-z]\z/i)
       even = 0
       odd = 0
       uletter = ["J", "A", "B", "C", "D", "E", "F", "G", "H", "I"]
       text = value.upcase
-      regular = /^[ABCDEFGHJKLMNPQRSVW]\d{7}[0-9,A-J]$/#g);
+      regular = /\A[ABCDEFGHJKLMNPQRSVW]\d{7}[0-9,A-J]\z/i
       if regular.match(value).blank?
         false
       else
@@ -54,7 +54,7 @@ module ActiveModel::Validations
     def validate_nie(v)
       return false if v.nil? || v.empty?
       value = v.upcase
-      return false unless value.match(/^[xyz][0-9]{7}[a-z]$/i)
+      return false unless value.match(/\A[xyz][0-9]{7}[a-z]\z/i)
       value[0] = {"X" => "0", "Y" => "1", "Z" => "2"}[value[0]]
       validate_nif(value)
     end
