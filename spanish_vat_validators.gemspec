@@ -2,7 +2,7 @@
 require File.expand_path('../lib/spanish_vat_validators/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Javier Toledo"]
+  gem.authors       = ["David Gil", "Javier Toledo"]
   gem.email         = ["javier@theagilemonkeys.com"]
   gem.description   = %q{Provides validators for spanish VAT numbers (NIF, CIF and NIE)}
   gem.summary       = %q{Provides Rails3+ compatible validators for spanish VAT numbers (NIF, CIF and NIE), with support for I18n}
